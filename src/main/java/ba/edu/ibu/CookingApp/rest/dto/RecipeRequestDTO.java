@@ -1,26 +1,42 @@
-package ba.edu.ibu.CookingApp.core.model;
+package ba.edu.ibu.CookingApp.rest.dto;
 
+import ba.edu.ibu.CookingApp.core.model.Recipe;
+import ba.edu.ibu.CookingApp.core.model.User;
 import ba.edu.ibu.CookingApp.core.model.enums.RecipeRestriction;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.ArrayList;
-@Document
-public class Recipe {
-    @Id
-    private String id;
+public class RecipeRequestDTO {
     private String name;
     private String description;
-    private String steps; //Cooking process step by step explained (Can it be of type String?)
-    private String ingredients; //Should it be an array of ingredients?
+    private String steps;
+    private String ingredients;
     private Double cookingTime;
     private RecipeRestriction restriction;
 
-    private ArrayList<String> reviews; //Is this way of adding the reviews (comments) okay, or should I make a separate model for reviews?
+    public RecipeRequestDTO(){}
 
+    public RecipeRequestDTO(Recipe recipe){
 
-    public String getId() { return id;}
-    public void setId(String id) { this.id = id;}
+        this.name = recipe.getName();
+        this.description = recipe.getDescription();
+        this.steps = recipe.getSteps();
+        this.ingredients = recipe.getIngredients();
+        this.cookingTime = recipe.getCookingTime();
+        this.restriction = recipe.getRestriction();
+    }
+
+    public Recipe toEntity() {
+
+        Recipe recipe = new Recipe();
+        recipe.setName(name);
+        recipe.setDescription(description);
+        recipe.setSteps(steps);
+        recipe.setIngredients(ingredients);
+        recipe.setCookingTime(cookingTime);
+        recipe.setRestriction(restriction);
+
+        return recipe;
+    }
+
 
     public String getName() { return name;}
     public void setName(String name) { this.name = name;}
@@ -40,7 +56,5 @@ public class Recipe {
     public RecipeRestriction getRestriction() { return restriction;}
     public void setRestriction(RecipeRestriction restriction) { this.restriction = restriction;}
 
-    public ArrayList<String> getReviews() { return reviews;}
-    public void setReviews(String newReview) { this.reviews.add(newReview);}
-}
 
+}

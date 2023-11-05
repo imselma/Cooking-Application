@@ -4,3 +4,10 @@ configuration:
     description: 'A cookin app that enables the user to find a lot of recipes and cooking tips.'
     developer: 'Selma Imširović'
     email: 'selma.imsirovic@stu.ibu.edu.ba'
+
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://selma:selmai78791@coookingapp.y0nuh75.mongodb.net/?retryWrites=true&w=majority
+      database: cookingApp
