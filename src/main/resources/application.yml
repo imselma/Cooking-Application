@@ -9,5 +9,10 @@ configuration:
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://selma:selmai78791@coookingapp.y0nuh75.mongodb.net/?retryWrites=true&w=majority
-      database: cookingApp
+      uri: mongodb+srv://selma:selmai78791@cookingapplication.xciffrk.mongodb.net/?retryWrites=true&w=majority
+      database: CookingApplication
+
+
+security:
+  jwt:
+    secret: 'mySecretKey78791formy1projectfromWebEngineering1Course'

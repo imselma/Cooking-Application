@@ -1,45 +1,54 @@
 package ba.edu.ibu.CookingApp.rest.dto;
 
+import ba.edu.ibu.CookingApp.core.model.Ingredient;
 import ba.edu.ibu.CookingApp.core.model.Recipe;
 import ba.edu.ibu.CookingApp.core.model.enums.RecipeRestriction;
 
+import java.util.List;
+
 public class RecipeDTO {
 
-    private String id;
-    private String recipe;
+    //private String id;
+    private String name;
+    private String description;
     private String steps;
-    private String ingredients;
     private Double cookingTime;
     private RecipeRestriction restriction;
+    private List<Ingredient> ingredients;
+    private String userName;
 
 
     public RecipeDTO(Recipe recipe){
 
-        this.id = recipe.getId();
-        this.recipe = "Name: " + recipe.getName() + " Description: " + recipe.getDescription();
+        this.name = recipe.getName();
+        this.description = recipe.getDescription();
         this.steps = recipe.getSteps();
         this.ingredients = recipe.getIngredients();
         this.cookingTime = recipe.getCookingTime();
         this.restriction = recipe.getRestriction();
+        this.userName = recipe.getUser().getName();
     }
 
-    public String getId() { return id;}
-    public void setId(String id) { this.id = id;}
+    public String getName() { return name;}
+    public void setName(String name) { this.name = name;}
 
-    public String getRecipe() { return recipe;}
-    public void setRecipe(String recipe) { this.recipe = recipe;}
-
+    public String getDescription() { return description;}
+    public void setDescription(String description) { this.description = description;}
 
     public String getSteps() { return steps;}
     public void setSteps(String steps) { this.steps = steps;}
 
-    public String getIngredients() { return ingredients;}
-    public void setIngredients(String ingredients) { this.ingredients = ingredients;}
+    public List<Ingredient> getIngredients() { return ingredients;}
+    public void setIngredients(List<Ingredient> ingredients) { this.ingredients = ingredients;}
 
     public Double getCookingTime() { return cookingTime;}
     public void setCookingTime(Double cookingTime) { this.cookingTime = cookingTime;}
 
     public RecipeRestriction getRestriction() { return restriction;}
     public void setRestriction(RecipeRestriction restriction) { this.restriction = restriction;}
+
+    public String getUserName() { return userName;}
+    public void setUserName(String userName) { this.userName = userName;}
+
 
 }

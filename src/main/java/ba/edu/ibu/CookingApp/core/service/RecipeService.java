@@ -1,13 +1,18 @@
 package ba.edu.ibu.CookingApp.core.service;
 
 import ba.edu.ibu.CookingApp.core.exceptions.repository.ResourceNotFoundException;
+import ba.edu.ibu.CookingApp.core.model.Ingredient;
 import ba.edu.ibu.CookingApp.core.model.Recipe;
+import ba.edu.ibu.CookingApp.core.model.User;
+import ba.edu.ibu.CookingApp.core.repository.IngredientRepository;
 import ba.edu.ibu.CookingApp.core.repository.RecipeRepository;
+import ba.edu.ibu.CookingApp.core.repository.UserRepository;
 import ba.edu.ibu.CookingApp.rest.dto.RecipeDTO;
 import ba.edu.ibu.CookingApp.rest.dto.RecipeRequestDTO;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,23 +22,55 @@ import static java.util.stream.Collectors.toList;
 public class RecipeService {
 
     private final RecipeRepository recipeRepository;
+    private final UserRepository userRepository;
+    private final UserService userService;
+    private final IngredientRepository ingredientRepository;
+    private final IngredientService ingredientService;
 
 
-    public RecipeService(RecipeRepository recipeRepository) {
+    public RecipeService(RecipeRepository recipeRepository, UserRepository userRepository, UserService userService, IngredientRepository ingredientRepository, IngredientService ingredientService) {
         this.recipeRepository = recipeRepository;
+        this.userRepository = userRepository;
+        this.userService= userService;
+        this.ingredientRepository = ingredientRepository;
+        this.ingredientService = ingredientService;
     }
 
-    //Get all recipes
+    //Create/add new recipe
+    public RecipeDTO addRecipe (RecipeRequestDTO recipeData){
+
+        String userId = recipeData.getUserId();
+        User user = userService.getUserByIdNoDTO(userId); //Koristila sam getUserByIdd() jer vraca User type a ne UserDTO kao druga
+        //List<String> ingredients = recipeData.getIngredients();
+        Recipe newRecipe = recipeData.toEntity();
+        newRecipe.setUser(user);
+        List<String> ingredientsList = recipeData.getIngredients();
+        List<Ingredient> ingredients = new ArrayList<Ingredient>();
+        for(String ingredient: ingredientsList) {
+            Ingredient tempIngredient = ingredientService.getIngredientByNameNotDTO(ingredient);
+            if(tempIngredient.getId() == null) {
+                continue;
+            } else {
+                ingredients.add(tempIngredient);
+            }
+
+        }
+        newRecipe.setIngredients(ingredients);
+        recipeRepository.save(newRecipe);
+        return new RecipeDTO(newRecipe);
+    }
+
+    //Get/view all recipes
     public List<RecipeDTO> getRecipes() {
         List<Recipe> recipes = recipeRepository.findAll();
 
         return recipes
                 .stream() //returns one by one
-                .map(RecipeDTO::new)
+                .map(RecipeDTO::new) //To map it to a DTO object
                 .collect(toList());
     }
 
-    //Get recipes by id
+    //Get recipes by id; View a specific recipe
     public RecipeDTO getRecipeById (String id){
         Optional<Recipe> recipe = recipeRepository.findById(id);
         if (recipe.isEmpty()) {
@@ -43,24 +80,22 @@ public class RecipeService {
         return new RecipeDTO(recipe.get());
     }
 
-    //Get recipes by name
+    //Get recipes by name; View a specific recipe
     public  RecipeDTO getRecipeByName (String name){
         Optional<Recipe> recipe = recipeRepository.findByName(name);
         if (recipe.isEmpty()) {
-            throw new ResourceNotFoundException("The user does not exist.");
+            throw new ResourceNotFoundException("The recipe does not exist.");
         }
 
-        return new RecipeDTO(recipe.get());
+        User  user = recipe.get().getUser();
+        String userName = user.getName();
+
+        RecipeDTO recipeDTO =  new RecipeDTO(recipe.get());
+        recipeDTO.setUserName(userName);
+        return recipeDTO;
     }
 
-    //Add new recipe
-    public RecipeDTO addRecipe (RecipeRequestDTO recipeData){
-        Recipe newRecipe = recipeRepository.save(recipeData.toEntity());
-
-        return new RecipeDTO(newRecipe);
-    }
-
-    //Update recipe
+    //Updat/edit recipe
     public RecipeDTO updateRecipe (String id, RecipeRequestDTO recipeData){
 
         Optional<Recipe> recipe = recipeRepository.findById(id); //Finding recipe by ID
@@ -82,6 +117,25 @@ public class RecipeService {
         }
 
         recipe.ifPresent(recipeRepository::delete);
+    }
+
+
+    //Geting all recipes but not as DTO
+    public List<Recipe> getAllRecipes() {
+        List<Recipe> recipes = recipeRepository.findAll();
+
+        return recipes;
+    }
+
+    // Get by Id but not as DTO
+    public Recipe getRecipeByIdNoDTO (String id){
+        Optional<Recipe> recipe = recipeRepository.findById(id);
+        if (recipe.isEmpty()) {
+            throw new ResourceNotFoundException("The user does not exist.");
+        }
+        System.out.println(recipe.get());
+
+        return recipe.get();
     }
 
 }

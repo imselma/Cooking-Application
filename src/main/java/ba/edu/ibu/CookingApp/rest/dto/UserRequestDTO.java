@@ -4,40 +4,38 @@ import ba.edu.ibu.CookingApp.core.model.User;
 import ba.edu.ibu.CookingApp.core.model.enums.UserType;
 
 
-//When we want to create a new user model instance, but some atributes need to be handeled by DB.
+//Data that will be requested to input from the user.
 public class UserRequestDTO {
+
     private String email;
     private String password;
     private String username;
-    private UserType userType;
     private String name;
     private String surname;
+    private UserType userType;
 
+    public UserRequestDTO() {}
 
-    public UserRequestDTO() {} //Default constructor providing default values -> it is used when creating a requestDTO.
-
-    //Converting a model to DTO, where the ID is handeled by the DB.
     public UserRequestDTO(User user){
 
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.username = user.getUsername();
-        this.userType = user.getUserType();
         this.name = user.getName();
         this.surname = user.getSurname();
+        this.userType = user.getUserType();
 
     }
 
-    //Converting a DTO to a model.
     public User toEntity() {
 
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setUsername(username);
-        user.setUserType(userType);
         user.setName(name);
         user.setSurname(surname);
+        user.setUserType(userType);
 
         return user;
     }
@@ -50,12 +48,14 @@ public class UserRequestDTO {
     public String getUsername() { return username;}
     public void setUsername(String username) { this.username = username; }
 
-    public UserType getUserType() { return userType;}
-    public void setUserType(UserType userType) { this.userType = userType; }
-
     public String getName() { return name;}
     public void setName(String name) { this.name = name; }
 
     public String getSurname() { return surname;}
     public void setSurname(String surname) { this.surname = surname; }
+
+    public UserType getUserType() {
+        return userType;
+    }
+    public void setUserType(UserType userType) {this.userType = userType; }
 }
