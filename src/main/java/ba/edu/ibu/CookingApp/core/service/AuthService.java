@@ -39,7 +39,7 @@ public class AuthService {
     }
 
     public LoginDTO signIn(LoginRequestDTO loginRequestDTO) {
-        authenticationManager.authenticate(
+       authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequestDTO.getEmail(), loginRequestDTO.getPassword())
         );
         User user = userRepository.findByEmail(loginRequestDTO.getEmail())

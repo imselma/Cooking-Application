@@ -16,3 +16,4 @@ spring:
 security:
   jwt:
     secret: 'mySecretKey78791formy1projectfromWebEngineering1Course'
+    expirationMs: 3600000
