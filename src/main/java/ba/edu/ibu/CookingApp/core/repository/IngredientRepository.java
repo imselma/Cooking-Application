@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface IngredientRepository extends MongoRepository<Ingredient, String> {
     Optional<Ingredient> findByName(String name);
+    Optional<Ingredient> findById(String id);
 }

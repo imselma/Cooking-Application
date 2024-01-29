@@ -16,8 +16,9 @@ public class Recipe {
     private List<Ingredient> ingredients;
     private Double cookingTime;
     private RecipeRestriction restriction;
+
     private User user; //To know who is the author
-    private Review[] reviews; //To know all the reviews which a ceratin recipe has.
+
 
     public String getId() { return id;}
     public void setId(String id) { this.id = id;}
@@ -39,9 +40,6 @@ public class Recipe {
 
     public RecipeRestriction getRestriction() { return restriction;}
     public void setRestriction(RecipeRestriction restriction) { this.restriction = restriction;}
-
-    public Review[] getReviews() { return reviews;}
-    public void setReview(Review[] reviews) { this.reviews = reviews;}
 
     public User getUser() { return user;}
     public void setUser (User user) { this.user = user;}

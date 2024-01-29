@@ -26,13 +26,13 @@ public class RecipeController {
 
     //Endpoint for getting all recipes
     @RequestMapping(method = RequestMethod.GET, path = "/")
-    public ResponseEntity<List<RecipeDTO>> getRecipes(){
+    public ResponseEntity<List<Recipe>> getRecipes(){
         return ResponseEntity.ok(recipeService.getRecipes());
     }
 
     //Endpoint for adding new recipe
     @RequestMapping(method = RequestMethod.POST, path = "/addRecipe")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<RecipeDTO> addRecipe (@RequestBody RecipeRequestDTO recipe){
         System.out.println(recipe.getIngredients());
         return ResponseEntity.ok(recipeService.addRecipe(recipe));
@@ -40,14 +40,14 @@ public class RecipeController {
 
     //Endpoint for getting recipe by ID
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+   // @PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<RecipeDTO> getRecipeById(@PathVariable String id){
         return ResponseEntity.ok(recipeService.getRecipeById(id));
     }
 
     //Endpoint for getting recipe by name
-     @RequestMapping(method = RequestMethod.GET, path = "/recipe")
-     @PreAuthorize("hasAnyAuthority('MEMBER')")
+     @RequestMapping(method = RequestMethod.GET, path = "/byname")
+     //@PreAuthorize("hasAnyAuthority('MEMBER')")
      public ResponseEntity<RecipeDTO> getRecipeByName(@RequestParam("name") String name){
         return ResponseEntity.ok(recipeService.getRecipeByName(name));
     }
@@ -55,14 +55,14 @@ public class RecipeController {
 
     //Endpoint for updating recipe
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<RecipeDTO> updateRecipe (@PathVariable String id, @RequestBody RecipeRequestDTO recipe){
         return ResponseEntity.ok(recipeService.updateRecipe(id, recipe));
     }
 
     //Endpoint for deleting recipe
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<Void> deleteRecipe(@PathVariable String id){
         recipeService.deleteRecipe(id);
 

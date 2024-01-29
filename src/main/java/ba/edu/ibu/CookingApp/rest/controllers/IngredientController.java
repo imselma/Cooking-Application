@@ -2,10 +2,7 @@ package ba.edu.ibu.CookingApp.rest.controllers;
 
 import ba.edu.ibu.CookingApp.core.model.Ingredient;
 import ba.edu.ibu.CookingApp.core.service.IngredientService;
-import ba.edu.ibu.CookingApp.rest.dto.IngredientDTO;
-import ba.edu.ibu.CookingApp.rest.dto.IngredientRequestDTO;
-import ba.edu.ibu.CookingApp.rest.dto.RecipeDTO;
-import ba.edu.ibu.CookingApp.rest.dto.RecipeRequestDTO;
+import ba.edu.ibu.CookingApp.rest.dto.*;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,29 +29,36 @@ public class IngredientController {
 
     //Endpoint for getting ingredients by id
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
-    public ResponseEntity<IngredientDTO> getIngredientVyId (@PathVariable String id){
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
+    public ResponseEntity<Ingredient> getIngredientById (@PathVariable String id){
         return ResponseEntity.ok(ingredientService.getIngredientById(id));
+    }
+
+    //Get by name
+    @RequestMapping(method = RequestMethod.GET, path = "/byname")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
+    public ResponseEntity<Ingredient> getIngredientByName(@RequestParam("name") String name){
+        return ResponseEntity.ok(ingredientService.getIngredientByName(name));
     }
 
 
     //Endpoint for adding a new ingredient
     @RequestMapping(method = RequestMethod.POST, path = "/addIngredient")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<IngredientDTO> addIngredient (@RequestBody IngredientRequestDTO ingredient){
         return ResponseEntity.ok(ingredientService.addIngredient(ingredient));
     }
 
     //Endpoint for updating/editing an ingredient
     @RequestMapping(method = RequestMethod.POST, path = "/updateIngredient{id}")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<IngredientDTO> updateIngredient(@PathVariable String id, @RequestBody IngredientRequestDTO ingredient){
         return ResponseEntity.ok(ingredientService.updateIngredients(id, ingredient));
     }
 
     //Endpoint for deleting an ingredient
     @RequestMapping(method = RequestMethod.DELETE, path="/{id}")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<Void> deleteIngredient(@PathVariable String id){
         ingredientService.deleteIngredient(id);
 

@@ -45,14 +45,14 @@ public class RecipeControllerTest {
         User user = new User();
         user.setName("Amina");
         Recipe recipe = new Recipe();
-        RecipeDTO recipeDTO = new RecipeDTO(recipe);
+        //RecipeDTO recipeDTO = new RecipeDTO(recipe);
         recipe.setName("Pizza");
         recipe.setDescription("Pizza is an Italian food made with different toppings.");
         recipe.setCookingTime(20.00);
         recipe.setSteps("1. Make a dough. 2. Proof the dough. 3. Prepare toppings. 5. Shape the dough and add toppings. 6. Bake the pizza.");
         recipe.setUser(user);
 
-        Mockito.when(recipeService.getRecipes()).thenReturn(List.of(recipeDTO));
+        Mockito.when(recipeService.getRecipes()).thenReturn(List.of(recipe));
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("api/recipes").contentType(MediaType.APPLICATION_JSON)).andReturn();
         String response = result.getResponse().getContentAsString();

@@ -15,7 +15,8 @@ public class RecipeDTO {
     private Double cookingTime;
     private RecipeRestriction restriction;
     private List<Ingredient> ingredients;
-    private String userName;
+    private String username;
+    private String surname;
 
 
     public RecipeDTO(Recipe recipe){
@@ -26,7 +27,8 @@ public class RecipeDTO {
         this.ingredients = recipe.getIngredients();
         this.cookingTime = recipe.getCookingTime();
         this.restriction = recipe.getRestriction();
-        this.userName = recipe.getUser().getName();
+        this.username = recipe.getUser().getName();
+        this.surname = recipe.getUser().getSurname();
     }
 
     public String getName() { return name;}
@@ -47,8 +49,11 @@ public class RecipeDTO {
     public RecipeRestriction getRestriction() { return restriction;}
     public void setRestriction(RecipeRestriction restriction) { this.restriction = restriction;}
 
-    public String getUserName() { return userName;}
-    public void setUserName(String userName) { this.userName = userName;}
+    public String getUserName() { return username;}
+    public void setUserName(String userName) { this.username = username;}
+
+    public String getSurname() { return surname;}
+    public void setSurname(String surname) { this.surname = surname;}
 
 
 }

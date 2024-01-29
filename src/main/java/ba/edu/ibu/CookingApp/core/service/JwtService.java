@@ -22,6 +22,11 @@ public class JwtService {
     public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
     }
+    public String extractFirstName(String token) { return extractClaim(token, Claims::getSubject); }
+    public String extractLastName(String token) { return extractClaim(token, Claims::getSubject); }
+    public String extractEmail(String token) { return extractClaim(token, Claims::getSubject); }
+
+
     public String generateToken(UserDetails userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }

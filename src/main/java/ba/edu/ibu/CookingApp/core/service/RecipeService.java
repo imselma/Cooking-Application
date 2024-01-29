@@ -40,11 +40,12 @@ public class RecipeService {
     public RecipeDTO addRecipe (RecipeRequestDTO recipeData){
 
         String userId = recipeData.getUserId();
-        User user = userService.getUserByIdNoDTO(userId); //Koristila sam getUserByIdd() jer vraca User type a ne UserDTO kao druga
-        //List<String> ingredients = recipeData.getIngredients();
+        User user = userService.getUserByIdNoDTO(userId);
+
         Recipe newRecipe = recipeData.toEntity();
         newRecipe.setUser(user);
-        List<String> ingredientsList = recipeData.getIngredients();
+
+       /* List<Ingredient> ingredientsList = recipeData.getIngredients();
         List<Ingredient> ingredients = new ArrayList<Ingredient>();
         for(String ingredient: ingredientsList) {
             Ingredient tempIngredient = ingredientService.getIngredientByNameNotDTO(ingredient);
@@ -57,17 +58,16 @@ public class RecipeService {
         }
         newRecipe.setIngredients(ingredients);
         recipeRepository.save(newRecipe);
+        System.out.println(newRecipe);*/
+
         return new RecipeDTO(newRecipe);
     }
 
     //Get/view all recipes
-    public List<RecipeDTO> getRecipes() {
+    public List<Recipe> getRecipes() {
         List<Recipe> recipes = recipeRepository.findAll();
 
-        return recipes
-                .stream() //returns one by one
-                .map(RecipeDTO::new) //To map it to a DTO object
-                .collect(toList());
+        return recipes;
     }
 
     //Get recipes by id; View a specific recipe

@@ -1,5 +1,6 @@
 package ba.edu.ibu.CookingApp.rest.dto;
 
+import ba.edu.ibu.CookingApp.core.model.Ingredient;
 import ba.edu.ibu.CookingApp.core.model.Recipe;
 import ba.edu.ibu.CookingApp.core.model.enums.RecipeRestriction;
 
@@ -9,14 +10,14 @@ public class RecipeRequestDTO {
     private String name;
     private String description;
     private String steps;
-    private List<String> ingredients;
+    private List<Ingredient> ingredients;
     private Double cookingTime;
     private RecipeRestriction restriction;
     private String userId;
 
     public RecipeRequestDTO(){}
 
-    public RecipeRequestDTO(Recipe recipe, List<String> ingredients, String user){
+    public RecipeRequestDTO(Recipe recipe, List<Ingredient> ingredients, String user){
 
         this.name = recipe.getName();
         this.description = recipe.getDescription();
@@ -33,7 +34,7 @@ public class RecipeRequestDTO {
         recipe.setName(name);
         recipe.setDescription(description);
         recipe.setSteps(steps);
-        this.setIngredients(ingredients);
+        recipe.setIngredients(ingredients);
         recipe.setCookingTime(cookingTime);
         recipe.setRestriction(restriction);
         this.setUserId(userId);
@@ -50,8 +51,8 @@ public class RecipeRequestDTO {
     public String getSteps() { return steps;}
     public void setSteps(String steps) { this.steps = steps;}
 
-    public List<String> getIngredients() { return ingredients;}
-    public void setIngredients(List<String> ingredients) { this.ingredients = ingredients;}
+    public List<Ingredient> getIngredients() { return ingredients;}
+    public void setIngredients(List<Ingredient> ingredients) { this.ingredients = ingredients;}
 
     public Double getCookingTime() { return cookingTime;}
     public void setCookingTime(Double cookingTime) { this.cookingTime = cookingTime;}

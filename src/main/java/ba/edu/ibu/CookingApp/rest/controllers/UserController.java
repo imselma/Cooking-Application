@@ -32,16 +32,23 @@ public class UserController {
 
     //Endpoint for getting users by Id
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<UserDTO> getUserById(@PathVariable String id){
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
-    //Endpoint for getting users by full name
+    //Endpoint for getting users by name
     @RequestMapping(method = RequestMethod.GET, path = "/byname")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
-    public ResponseEntity<UserDTO> getUserByFullName(@RequestParam("name") String name, @RequestParam("surname") String surname){ //I used @RequestParam to access data from query parameters
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
+    public ResponseEntity<User> getUserByName(@RequestParam("name") String name){ //I used @RequestParam to access data from query parameters
         return ResponseEntity.ok(userService.getUserByName(name));
+    }
+
+    //Get user by email
+    @RequestMapping(method = RequestMethod.GET, path = "/byemail")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
+    public ResponseEntity<User> getUserByEmail(@RequestParam("email") String email){ //I used @RequestParam to access data from query parameters
+        return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
     /*//Endpoint for adding user
@@ -52,14 +59,14 @@ public class UserController {
 
     //Endpoint for updating user
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<UserDTO> updateUser(@PathVariable String id, @RequestBody UserRequestDTO user){ //For updating I have to proceed the id and userRequestDTO parameter
         return ResponseEntity.ok(userService.updateUser(id,user));
     }
 
     //Endpoint for deleting user
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<Void> deleteUser(@PathVariable String id){
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); //When deleted, this occures to indicate that the operation is completed.

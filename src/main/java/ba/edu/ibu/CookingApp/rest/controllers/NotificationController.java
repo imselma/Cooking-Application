@@ -22,7 +22,7 @@ public class NotificationController {
 
     //Endpoint for sending the message to all users
     @RequestMapping(path = "/broadcast", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<Void> sendBroadcastMessage(@RequestBody MessageDTO message) throws IOException {
 
         System.out.println("The message is: " + message.getMessage());
@@ -32,7 +32,7 @@ public class NotificationController {
 
     //Endpoint for sending the message to single user
     @RequestMapping(path = "/send-to/{userId}", method = RequestMethod.POST)
-    @PreAuthorize("hasAnyAuthority('MEMBER')")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<Void> sendMessageToSingleUser(@PathVariable String userId, @RequestBody MessageDTO message) throws IOException {
         System.out.println("The message is: " + message.getMessage());
         notificationService.sendMessage(userId, message.getMessage());

@@ -52,15 +52,26 @@ public class UserService {
         return new UserDTO(user.get());
     }
 
-    //Get users by full name / show user's profile
-    public UserDTO getUserByName (String name){
+    //Get users by name
+    public User getUserByName (String name){
         Optional<User> user = userRepository.findByName(name);
         if (user.isEmpty()) {
             throw new ResourceNotFoundException("The user does not exist.");
         }
 
-        return new UserDTO(user.get());
+        return user.get();
     }
+
+    //Get by email
+    public User getUserByEmail (String email){
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            throw new ResourceNotFoundException("The user does not exist.");
+        }
+
+        return user.get();
+    }
+
 
     //Gets all users
     public List<UserDTO> getUsers() {

@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -22,9 +23,7 @@ public class User implements UserDetails {
     private String name;
     private String surname;
     private UserType userType;
-    //private List<Recipe> authorizedRecipes;
-    //private Review[] addedReviews;
-    //private Recipe[] favoriteRecipes;
+    private List<Recipe> recipes;
 
 
     public String getId() {
@@ -105,6 +104,9 @@ public class User implements UserDetails {
     }
 
     public void setUserType(UserType userType) {this.userType = userType;}
+
+    public List<Recipe> getRecipes() { return recipes;}
+    public void setRecipes(List<Recipe> recipes) { this.recipes = recipes;}
 
 }
 

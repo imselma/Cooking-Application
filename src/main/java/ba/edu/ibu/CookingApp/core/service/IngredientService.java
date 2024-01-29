@@ -31,12 +31,12 @@ public class IngredientService {
     }
 
     //Get ingredients by id
-    public IngredientDTO getIngredientById(String id){
+    public Ingredient getIngredientById(String id){
         Optional<Ingredient> ingredient = ingredientRepository.findById(id);
         if (ingredient.isEmpty()) {
             throw new ResourceNotFoundException("The ingredient does not exist.");
         }
-        return new IngredientDTO(ingredient.get());
+        return ingredient.get();
     }
 
     //Get all ingredients
@@ -50,13 +50,13 @@ public class IngredientService {
     }
 
     //Get ingredients by name
-    public IngredientDTO getIngredientByName(String name){
+    public Ingredient getIngredientByName(String name){
         Optional<Ingredient> ingredient = ingredientRepository.findByName(name);
         if(ingredient.isEmpty()){
             throw new ResourceNotFoundException("Ingredient not found!");
         }
 
-        return new IngredientDTO(ingredient.get());
+        return ingredient.get();
     }
 
     //Update/Edit ingredients
