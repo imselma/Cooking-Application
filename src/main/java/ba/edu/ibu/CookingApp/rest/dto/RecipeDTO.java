@@ -14,7 +14,7 @@ public class RecipeDTO {
     private String steps;
     private Double cookingTime;
     private RecipeRestriction restriction;
-    private List<Ingredient> ingredients;
+    private List<String> ingredients;
     private String username;
     private String surname;
 
@@ -40,8 +40,8 @@ public class RecipeDTO {
     public String getSteps() { return steps;}
     public void setSteps(String steps) { this.steps = steps;}
 
-    public List<Ingredient> getIngredients() { return ingredients;}
-    public void setIngredients(List<Ingredient> ingredients) { this.ingredients = ingredients;}
+    public List<String> getIngredients() { return ingredients;}
+    public void setIngredients(List<String> ingredients) { this.ingredients = ingredients;}
 
     public Double getCookingTime() { return cookingTime;}
     public void setCookingTime(Double cookingTime) { this.cookingTime = cookingTime;}

@@ -15,7 +15,7 @@ public class UserDTO {
     private String name;
     private String surname;
     private UserType userType;
-    private List<Recipe> recipes;
+
 
     public UserDTO(User user){
 
@@ -24,7 +24,6 @@ public class UserDTO {
         this.name = user.getName();
         this.surname = user.getSurname();
         this.userType = user.getUserType();
-        this.recipes = user.getRecipes();
     }
 
     public String getEmail() { return email;}
@@ -43,6 +42,4 @@ public class UserDTO {
     }
     public void setUserType(UserType userType) {this.userType = userType;}
 
-    public List<Recipe> getRecipes() { return recipes;}
-    public void setRecipes(List<Recipe> recipes) { this.recipes = recipes;}
 }

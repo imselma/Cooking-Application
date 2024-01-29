@@ -49,7 +49,7 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientService.addIngredient(ingredient));
     }
 
-    //Endpoint for updating/editing an ingredient
+    //Endpoint for updating an ingredient
     @RequestMapping(method = RequestMethod.POST, path = "/updateIngredient{id}")
     //@PreAuthorize("hasAnyAuthority('MEMBER')")
     public ResponseEntity<IngredientDTO> updateIngredient(@PathVariable String id, @RequestBody IngredientRequestDTO ingredient){

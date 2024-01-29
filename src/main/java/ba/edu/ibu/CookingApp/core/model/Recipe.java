@@ -13,11 +13,10 @@ public class Recipe {
     private String name;
     private String description;
     private String steps;
-    private List<Ingredient> ingredients;
+    private List<String> ingredients;
     private Double cookingTime;
     private RecipeRestriction restriction;
-
-    private User user; //To know who is the author
+    private User user;
 
 
     public String getId() { return id;}
@@ -32,8 +31,8 @@ public class Recipe {
     public String getSteps() { return steps;}
     public void setSteps(String steps) { this.steps = steps;}
 
-    public List<Ingredient> getIngredients() { return ingredients;}
-    public void setIngredients(List<Ingredient> ingredients) { this.ingredients = ingredients;}
+    public List<String> getIngredients() { return ingredients;}
+    public void setIngredients(List<String> ingredients) { this.ingredients = ingredients;}
 
     public Double getCookingTime() { return cookingTime;}
     public void setCookingTime(Double cookingTime) { this.cookingTime = cookingTime;}

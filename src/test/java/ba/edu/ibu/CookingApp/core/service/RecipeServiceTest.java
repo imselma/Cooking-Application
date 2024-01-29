@@ -37,21 +37,24 @@ public class RecipeServiceTest {
         user.setName("Selma");
 
 
-        Ingredient ingredient1 = new Ingredient();
+       /* Ingredient ingredient1 = new Ingredient();
         ingredient1.setName("Flour");
         Ingredient ingredient2 = new Ingredient();
         ingredient2.setName("Sugar");
         Ingredient ingredient3 = new Ingredient();
-        ingredient3.setName("Milk");
-        List<Ingredient> ingredientList = new ArrayList<>();
-        ingredientList.add(ingredient1);
+        ingredient3.setName("Milk");*/
+        List<String> ingredientList = new ArrayList<>();
+        /*ingredientList.add(ingredient1);
         ingredientList.add(ingredient2);
-        ingredientList.add(ingredient3);
+        ingredientList.add(ingredient3);*/
+        ingredientList.add("Milk");
+        ingredientList.add("Flour");
+        ingredientList.add("Suggar");
 
-        List<String> ingredientsNameList = new ArrayList<>();
+        /*List<String> ingredientsNameList = new ArrayList<>();
         ingredientList.forEach(ingredient ->
                 ingredientsNameList.add(ingredient.getName() != null ? ingredient.getName() : "")
-        );
+        );*/
 
         recipe.setName("Muffins");
         recipe.setDescription("Muffins are small, flavorful cakes with various additions like chocolate or fruit. They're quick to make and perfect for breakfast or a snack.");
@@ -75,21 +78,24 @@ public class RecipeServiceTest {
         user.setName("Selma");
 
 
-        Ingredient ingredient1 = new Ingredient();
+      /*  Ingredient ingredient1 = new Ingredient();
         ingredient1.setName("Flour");
         Ingredient ingredient2 = new Ingredient();
         ingredient2.setName("Sugar");
         Ingredient ingredient3 = new Ingredient();
-        ingredient3.setName("Milk");
-        List<Ingredient> ingredientList = new ArrayList<>();
-        ingredientList.add(ingredient1);
+        ingredient3.setName("Milk");*/
+        List<String> ingredientList = new ArrayList<>();
+       /* ingredientList.add(ingredient1);
         ingredientList.add(ingredient2);
-        ingredientList.add(ingredient3);
+        ingredientList.add(ingredient3);*/
+        ingredientList.add("Flour");
+        ingredientList.add("Sugar");
+        ingredientList.add("Milk");
 
-        List<String> ingredientsNameList = new ArrayList<>();
+       /* List<String> ingredientsNameList = new ArrayList<>();
         ingredientList.forEach(ingredient ->
                 ingredientsNameList.add(ingredient.getName() != null ? ingredient.getName() : "")
-        );
+        );*/
 
         recipe.setId("someMongoId");
         recipe.setName("Muffins");

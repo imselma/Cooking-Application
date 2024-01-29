@@ -82,13 +82,6 @@ public class IngredientService {
         ingredient.ifPresent(ingredientRepository :: delete);
     }
 
-    //Get all ingredients not DTO
-    public List<Ingredient> getAllIngredientsNotDTO(){
-        List<Ingredient> ingredients = ingredientRepository.findAll();
-
-        return ingredients;
-    }
-
     //Get ingredients by name not DTO
     public Ingredient getIngredientByNameNotDTO(String name){
         Optional<Ingredient> ingredient = ingredientRepository.findByName(name);

@@ -44,33 +44,19 @@ public class RecipeService {
 
         Recipe newRecipe = recipeData.toEntity();
         newRecipe.setUser(user);
-
-       /* List<Ingredient> ingredientsList = recipeData.getIngredients();
-        List<Ingredient> ingredients = new ArrayList<Ingredient>();
-        for(String ingredient: ingredientsList) {
-            Ingredient tempIngredient = ingredientService.getIngredientByNameNotDTO(ingredient);
-            if(tempIngredient.getId() == null) {
-                continue;
-            } else {
-                ingredients.add(tempIngredient);
-            }
-
-        }
-        newRecipe.setIngredients(ingredients);
         recipeRepository.save(newRecipe);
-        System.out.println(newRecipe);*/
 
         return new RecipeDTO(newRecipe);
     }
 
-    //Get/view all recipes
+    //Getall recipes
     public List<Recipe> getRecipes() {
         List<Recipe> recipes = recipeRepository.findAll();
 
         return recipes;
     }
 
-    //Get recipes by id; View a specific recipe
+    //Get recipes by id
     public RecipeDTO getRecipeById (String id){
         Optional<Recipe> recipe = recipeRepository.findById(id);
         if (recipe.isEmpty()) {
@@ -80,7 +66,7 @@ public class RecipeService {
         return new RecipeDTO(recipe.get());
     }
 
-    //Get recipes by name; View a specific recipe
+    //Get recipes by name
     public  RecipeDTO getRecipeByName (String name){
         Optional<Recipe> recipe = recipeRepository.findByName(name);
         if (recipe.isEmpty()) {
@@ -95,7 +81,7 @@ public class RecipeService {
         return recipeDTO;
     }
 
-    //Updat/edit recipe
+    //Updat recipe
     public RecipeDTO updateRecipe (String id, RecipeRequestDTO recipeData){
 
         Optional<Recipe> recipe = recipeRepository.findById(id); //Finding recipe by ID
@@ -103,8 +89,12 @@ public class RecipeService {
             throw new ResourceNotFoundException("The recipe does not exist.");
         }
 
+        String userId = recipeData.getUserId();
+        User user = userService.getUserByIdNoDTO(userId);
+
         Recipe updatedRecipe = recipeData.toEntity(); //Creating a new instance of recipe and assigning the data
         updatedRecipe.setId(recipe.get().getId()); //Set the ID, in order just to update the instance, and not to make a new one
+        updatedRecipe.setUser(user);
         updatedRecipe = recipeRepository.save(updatedRecipe); //updating the model
         return new RecipeDTO(updatedRecipe);
     }

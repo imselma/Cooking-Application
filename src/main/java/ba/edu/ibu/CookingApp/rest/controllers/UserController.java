@@ -51,7 +51,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getUserByEmail(email));
     }
 
-    /*//Endpoint for adding user
+    /*Endpoint for adding user
     @RequestMapping(method = RequestMethod.POST, path = "/addUser")
     public ResponseEntity<UserDTO> register(@RequestBody UserRequestDTO user){
         return ResponseEntity.ok(userService.addUser(user));
@@ -71,5 +71,12 @@ public class UserController {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); //When deleted, this occures to indicate that the operation is completed.
 
+    }
+
+    //Geting user by id but not DTO
+    @RequestMapping(method = RequestMethod.GET, path = "notDTO/{id}")
+    //@PreAuthorize("hasAnyAuthority('MEMBER')")
+    public ResponseEntity<User> getUserByIdNotDto(@PathVariable String id){
+        return ResponseEntity.ok(userService.getUserByIdNoDTO(id));
     }
 }

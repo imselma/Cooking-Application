@@ -72,7 +72,6 @@ public class UserService {
         return user.get();
     }
 
-
     //Gets all users
     public List<UserDTO> getUsers() {
         List<User> users = userRepository.findAll();
@@ -82,6 +81,7 @@ public class UserService {
                 .map(UserDTO::new)
                 .collect(toList());
     }
+
     //Update the user's profile (included the changing of the password)
     public UserDTO updateUser(String id, UserRequestDTO userData) {
 
@@ -114,15 +114,6 @@ public class UserService {
         }
         System.out.println(user.get());
 
-        return user.get();
-    }
-
-    //Get user by name but as a User model, not UserDTO
-    public User getUserByNameNotDTO (String name){
-        Optional<User> user = userRepository.findByName(name);
-        if (user.isEmpty()) {
-            throw new ResourceNotFoundException("The user does not exist.");
-        }
         return user.get();
     }
 

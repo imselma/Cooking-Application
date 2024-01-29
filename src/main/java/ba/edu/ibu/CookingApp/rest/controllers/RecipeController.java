@@ -68,4 +68,10 @@ public class RecipeController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); //Marks the operation completed
     }
+
+    //Endpoint for getting a recipe by id but not DTO
+    @RequestMapping(method = RequestMethod.GET, path= "notDTO/{id}")
+    public ResponseEntity<Recipe> getRecipeByIdNoDTO(@PathVariable String id){
+        return ResponseEntity.ok(recipeService.getRecipeByIdNoDTO(id));
+    }
 }

@@ -23,7 +23,6 @@ public class User implements UserDetails {
     private String name;
     private String surname;
     private UserType userType;
-    private List<Recipe> recipes;
 
 
     public String getId() {
@@ -104,9 +103,6 @@ public class User implements UserDetails {
     }
 
     public void setUserType(UserType userType) {this.userType = userType;}
-
-    public List<Recipe> getRecipes() { return recipes;}
-    public void setRecipes(List<Recipe> recipes) { this.recipes = recipes;}
 
 }
 
