@@ -16,9 +16,9 @@ public class CorsConfiguration {
             public void addCorsMappings(CorsRegistry registry) {
                 registry
                         .addMapping("/**")
-                        .allowedOrigins("https://cooking-app-frontend.onrender.com") // Add your frontend URL here
+                        .allowedOrigins("https://cooking-app-frontend.onrender.com")
                         .allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
-                        .allowedHeaders("*"); // Add your allowed headers here
+                        .allowedHeaders("*");
             }
         };
     }
